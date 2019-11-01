@@ -15,7 +15,7 @@ namespace StrategyPattern
     {
         public ITool CurrentTool { get; private set; }
         public Bitmap Canvas { get; private set; }
-        private PointF lastMousePos;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,8 +27,6 @@ namespace StrategyPattern
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            this.lastMousePos = e.Location;
-
             this.CurrentTool.HandleMouseMove(e.Location, this.Canvas);
             this.Invalidate();
         }
@@ -48,7 +46,7 @@ namespace StrategyPattern
             e.Graphics.Clear(Color.White);
             e.Graphics.DrawImage(this.Canvas, Point.Empty);
 
-            this.CurrentTool.RenderPreview(this.lastMousePos, e.Graphics);
+            this.CurrentTool.RenderPreview(e.Graphics);
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
