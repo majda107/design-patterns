@@ -12,6 +12,6 @@ namespace StrategyPattern.Tools
         void HandleMouseMove(PointF position, Bitmap canvas);
         void HandleMouseDown(PointF position, Bitmap canvas);
         void HandleMouseUp(PointF position, Bitmap canvas);
-        void RenderPreview(PointF position, Graphics window);
+        void RenderPreview(Graphics window);
     }
 }
