@@ -11,6 +11,7 @@ namespace StrategyPattern.Tools
     {
         private bool draw;
         private PointF lastPosition;
+        private PointF currrentLocation;
         public PaintBrush()
         {
             this.draw = false;
@@ -24,6 +25,8 @@ namespace StrategyPattern.Tools
 
         public void HandleMouseMove(PointF position, Bitmap canvas)
         {
+            this.currrentLocation = position;
+
             if(this.draw)
             {
                 var g = Graphics.FromImage(canvas);
@@ -33,9 +36,9 @@ namespace StrategyPattern.Tools
             }
         }
 
-        public void RenderPreview(PointF position, Graphics window)
+        public void RenderPreview(Graphics window)
         {
-            window.DrawEllipse(Pens.Black, position.X - 3, position.Y - 3, 6, 6);
+            window.DrawEllipse(Pens.Black, this.currrentLocation.X - 3, this.currrentLocation.Y - 3, 6, 6);
         }
     }
 }

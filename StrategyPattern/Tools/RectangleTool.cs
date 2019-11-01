@@ -10,6 +10,7 @@ namespace StrategyPattern.Tools
     class RectangleTool : ITool
     {
         private PointF firstLocation;
+        private PointF currentLocation;
         private bool preview;
         public void HandleMouseDown(PointF position, Bitmap canvas)
         {
@@ -19,7 +20,7 @@ namespace StrategyPattern.Tools
 
         public void HandleMouseMove(PointF position, Bitmap canvas)
         {
-            
+            this.currentLocation = position;
         }
 
         public void HandleMouseUp(PointF position, Bitmap canvas)
@@ -42,13 +43,13 @@ namespace StrategyPattern.Tools
             return RectangleF.FromLTRB(left, top, right, bottom);
         }
 
-        public void RenderPreview(PointF position, Graphics window)
+        public void RenderPreview(Graphics window)
         {
-            window.DrawEllipse(Pens.Black, position.X - 3, position.Y - 3, 6, 6);
+            window.DrawEllipse(Pens.Black, this.currentLocation.X - 3, this.currentLocation.Y - 3, 6, 6);
 
             if (!this.preview) return;
 
-            window.DrawRectangle(Pens.Black, Rectangle.Round(this.RectangleFromPoints(this.firstLocation, position)));
+            window.DrawRectangle(Pens.Black, Rectangle.Round(this.RectangleFromPoints(this.firstLocation, this.currentLocation)));
         }
     }
 }
